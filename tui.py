@@ -262,5 +262,6 @@ def display_records(records, cols):
     :param cols: A list of integer values that represent column indexes
     :return: Does not return anything
     """
+
     for record in records:
         display_record(record, cols)
