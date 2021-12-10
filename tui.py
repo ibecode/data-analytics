@@ -193,7 +193,7 @@ def observation_dates():
 
     :return: a list of observation dates
     """
-    user_input = input('Please enter observation dates (comma separated) in the format mm/dd/yyyy e.g 01/22/2020'
+    user_input = input('Please enter observation dates (comma separated) in the format mm/dd/yyyy e.g 01/22/2020')
     list_of_dates = user_input.split(',')
     return list_of_dates
 
