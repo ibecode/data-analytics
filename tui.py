@@ -25,7 +25,6 @@ def welcome():
     print('-' * title_length)
 
 
-
 def error(msg):
     """
     Task 2: Display an error message.
@@ -39,6 +38,7 @@ def error(msg):
     """
     error_message = 'Error! {}.'
     print(error_message.format(msg))
+
 
 def progress(operation, value):
     """
@@ -66,7 +66,6 @@ def progress(operation, value):
         status = 'has completed'
     message = '{} {}'
     print(message.format(operation, status))
-
 
 
 def menu(variant=0):
@@ -149,7 +148,6 @@ def menu(variant=0):
         print('Sorry. You selected an invalid option.')
 
 
-
 def total_records(num_records):
     f"""
     Task 5: Display the total number of records in the data set.
@@ -167,8 +165,6 @@ def total_records(num_records):
     print(message.format(num_records))
 
 
-
-
 def serial_number():
     """
     Task 6: Read in the serial number of a record and return the serial number.
@@ -178,8 +174,12 @@ def serial_number():
 
     :return: the serial number for a record
     """
-    user_input = input('Please enter a serial number')
-    return int(user_input)
+    user_input = input('Please enter a serial number: ')
+    try:
+        return int(user_input)
+    except ValueError:
+        error("Please enter integer")
+        serial_number()
 
 
 def observation_dates():
@@ -193,10 +193,9 @@ def observation_dates():
 
     :return: a list of observation dates
     """
-    user_input = input('Please enter observation dates (comma separated) in the format mm/dd/yyyy e.g 01/22/2020')
+    user_input = input('Please enter observation dates (comma separated) in the format mm/dd/yyyy e.g 01/22/2020: ')
     list_of_dates = user_input.split(',')
     return list_of_dates
-
 
 
 def display_record(record, cols=None):
@@ -236,7 +235,6 @@ def display_record(record, cols=None):
         print(new_record)
 
 
-
 def display_records(records, cols):
     """
     Task 9: Display each record in the specified list of records.
@@ -253,7 +251,7 @@ def display_records(records, cols):
 
     The function should iterate through each record in records and display the record.
 
-    Each record should be displayed as a list of values e.g. [1,01/22/2020,Anhui,Mainland China,1/22/2020 17:00,1,0,0]
+    Each record should be displayed as a list of values e.g. [1,01/22/2020,Anhui,Mainland China,1/22/2020 17:00,1,0,0]+
     Only the columns whose indexes are included in cols should be displayed for each record.
 
     If cols is an empty list or None then all values for the record should be displayed.
