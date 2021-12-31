@@ -122,7 +122,6 @@ def run():
                 data = process.records_summary(covid_records)
                 print(data)
                 tui.progress("summary process", 100)
-
         # Task 21: Check if the user selected the option for setting up or querying the database.
         # If so, then do the following:
         # - Use the appropriate function in the module 'tui' to display a message to indicate that the
