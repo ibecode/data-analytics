@@ -40,7 +40,7 @@ def run():
     try:
         with open("./data/covid_19_data.csv") as file:
             csv_read = csv.reader(file)
-            heading = next(csv_read)
+            next(csv_read)
             for data in csv_read:
                 covid_records.append(data)
             record_loaded = len(covid_records)
@@ -54,7 +54,7 @@ def run():
         # for the different operations that can be performed on the data (menu variant 0).
         # Assign the selected option to a suitable local variable
         # TODO: Your code here
-        menu_items = tui.menu()
+        main_menu = tui.menu()
 
         # Task 15: Check if the user selected the option for processing data.  If so, then do the following:
         # - Use the appropriate function in the module tui to display a message to indicate that the data processing
@@ -100,8 +100,8 @@ def run():
         #       - Use the appropriate function in the module 'tui' to indicate that the summary
         #       process has completed.
         # TODO: Your code here
-        if menu_items == 1:
-            sub_menu = tui.menu(menu_items)
+        if main_menu == 1:
+            sub_menu = tui.menu(main_menu)
             if sub_menu == 1:
                 tui.progress("record retrieval process", 0)
                 data = process.record_by_serial_no(covid_records)
@@ -122,6 +122,10 @@ def run():
                 data = process.records_summary(covid_records)
                 print(data)
                 tui.progress("summary process", 100)
+            else:
+                tui.error("Invalid selection")
+                tui.menu(main_menu)
+
         # Task 21: Check if the user selected the option for setting up or querying the database.
         # If so, then do the following:
         # - Use the appropriate function in the module 'tui' to display a message to indicate that the
@@ -133,7 +137,32 @@ def run():
         # - Use the appropriate function in the module 'tui' to display a message to indicate that the
         # database querying operation has completed.
         # TODO: Your code here
+        if main_menu == 2:
+            sub_menu = tui.menu(main_menu)
+            if sub_menu == 1:
+                tui.progress("Setting up database", 0)
+                database.database_setup(covid_records)
+                tui.progress("Setting up database", 100)
 
+            elif sub_menu == 2:
+                tui.progress("Retrieving countries in alphabetical order", 0)
+                print(database.countries_alpha())
+                tui.progress("Retrieving countries in alphabetical order", 100)
+            elif sub_menu == 3:
+                tui.progress("Retrieving records by serial number", 0)
+                print(database.record_summary())
+                tui.progress("Retrieving records by serial number", 100)
+            elif sub_menu == 4:
+                tui.progress("Retrieving top 5 countries for confirmed cases", 0)
+                print(database.top_confirmed_cases())
+                tui.progress("Retrieving top 5 countries for confirmed cases", 100)
+            elif sub_menu == 5:
+                tui.progress("Retrieving top 5 countries for deaths", 0)
+                print(database.top_countries_death_by_dates())
+                tui.progress("Retrieving top 5 countries for deaths", 100)
+            else:
+                # tui.error("Invalid selection")
+                tui.menu(main_menu)
 
         # Task 27: Check if the user selected the option for visualising data.
         # If so, then do the following:
@@ -149,12 +178,13 @@ def run():
         # Task 31: Check if the user selected the option for exiting the program.
         # If so, then break out of the loop
         # TODO: Your code here
-
+        elif main_menu == 4:
+            break
         # Task 32: If the user selected an invalid option then use the appropriate function of the
         # module tui to display an error message
         # TODO: Your code here
-        tui.error()
-
+        else:
+            tui.error("Invalid option selected")
 
 
 if __name__ == "__main__":
