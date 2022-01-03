@@ -14,6 +14,7 @@ Note:   any user input/output should be done using the appropriate functions in 
 import tui
 import process
 import database
+import visual
 import csv
 
 # Task 11: Create an empty list named 'covid_records'.
@@ -161,7 +162,7 @@ def run():
                 print(database.top_countries_death_by_dates())
                 tui.progress("Retrieving top 5 countries for deaths", 100)
             else:
-                # tui.error("Invalid selection")
+                tui.error("Invalid selection")
                 tui.menu(main_menu)
 
         # Task 27: Check if the user selected the option for visualising data.
@@ -183,8 +184,8 @@ def run():
         # Task 32: If the user selected an invalid option then use the appropriate function of the
         # module tui to display an error message
         # TODO: Your code here
-        else:
-            tui.error("Invalid option selected")
+    else:
+        tui.error("Invalid option selected")
 
 
 if __name__ == "__main__":
