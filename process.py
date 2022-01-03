@@ -2,6 +2,7 @@
 This module is responsible for processing the data.  Each function in this module will take a list of records,
 process it and return the desired result.
 """
+import tui
 
 """
 Task 16 - 20: Write suitable functions to process the data.
@@ -25,4 +26,49 @@ The required functions are as follows:
  
 """
 
+
 # TODO: Your code here
+
+def total_records(records):
+    total_num = len(records)
+    tui.total_records(total_num)
+
+
+def record_by_serial_no(records):
+    number = tui.serial_number()
+    record = records[number - 1]
+    return record
+
+
+def record_by_date(records):
+    dates = tui.observation_dates()
+    covid_list = []
+    for data in records:
+        for date in dates:
+            if records[1] == date:
+                covid_list.append(data)
+    return covid_list
+
+
+def records_by_country(records):
+    countries = {}
+    for data in records:
+        countries[data[3]] = []
+    for data in records:
+        countries[data[3]].append(data)
+    return countries
+
+
+def records_summary(records):
+    countries = {}
+    for record in records:
+        countries[record[3]] = {"confirmed": 0, "deaths": 0, "recovery": 0}
+    for record in records:
+        confirmed = countries[record[3]]["confirmed"] + int(record[5])
+        deaths = countries[record[3]]["deaths"] + int(record[6])
+        recovery = countries[record[3]]["recovery"] + int(record[7])
+        countries[record[3]]["confirmed"] = confirmed
+        countries[record[3]]["deaths"] = deaths
+        countries[record[3]]["recovery"] = recovery
+    for country in countries.keys():
+        return f"{country}: {countries[country]}"
