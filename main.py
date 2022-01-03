@@ -20,6 +20,7 @@ import csv
 # Task 11: Create an empty list named 'covid_records'.
 # This will be used to store the data read from the source data file.
 # TODO: Your code here
+
 covid_records = []
 
 
