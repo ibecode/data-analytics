@@ -2,8 +2,6 @@
 This module is responsible for setting up and querying the database.
 """
 import sqlite3
-import csv
-
 import tui
 
 """
@@ -75,13 +73,13 @@ def database_setup(records):
 def countries_alpha():
     global default_db
     try:
-        countries = {}
+        # countries = {}
         if default_db == '':
             tui.error("setup a database")
         else:
             db = sqlite3.connect(f"{default_db}.db")
             cursor = db.cursor()
-            sql = "SELECT country FROM records ORDER BY country ASC"
+            sql = "select distinct Country from records order by Country"
             cursor.execute(sql)
             records = cursor.fetchall()
             db.close()
@@ -146,5 +144,3 @@ def top_countries_death_by_dates():
             return tcdbd
     except TypeError:
         tui.error("Unable to connect")
-
-
