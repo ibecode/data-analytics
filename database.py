@@ -1,7 +1,6 @@
 """
 This module is responsible for setting up and querying the database.
 """
-# import tui
 import sqlite3
 import csv
 
@@ -55,14 +54,10 @@ def database_setup(records):
                 "recovered" INTEGER NOT NULL,
                 PRIMARY KEY("id" AUTOINCREMENT)
             );
-            COMMIT;
-    
-            """
+            COMMIT; """
         cursor.executescript(sql)
-
         global default_db
         default_db = db_name
-
         for record in records:
             sql = "INSERT INTO records " \
                   "(observation_date, state, country, update_date, confirmed, deaths, recovered )" \
@@ -70,7 +65,6 @@ def database_setup(records):
                   "(?, ?, ?, ?, ?, ?, ?)"
             values = [record[1], record[2], record[3], record[4], record[5], record[6], record[7]]
             cursor.execute(sql, values)
-
         db.commit()
         db.close()
         print("Database creation completed")
@@ -123,7 +117,7 @@ def top_confirmed_cases():
         else:
             db = sqlite3.connect(f"{default_db}.db")
             cursor = db.cursor()
-            sql = "SELECT * FROM records ORDER BY confirmed DESC LIMIT 5"
+            sql = "SELECT * FROM records GROUP BY country ORDER BY SUM(confirmed) DESC LIMIT 5"
             cursor.execute(sql)
             records = cursor.fetchall()
             db.close()
