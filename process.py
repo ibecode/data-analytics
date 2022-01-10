@@ -71,5 +71,3 @@ def records_summary(records):
         countries[record[3]]["deaths"] = deaths
         countries[record[3]]["recovery"] = recovery
     return countries
-    # for country in countries.keys():
-    #     return f"{country}: {countries[country]}"
