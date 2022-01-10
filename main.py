@@ -122,7 +122,8 @@ def run():
             elif sub_menu == 4:
                 tui.progress("summary process", 0)
                 data = process.records_summary(covid_records)
-                print(data)
+                for key, value in data.items():
+                    print(f"{key}: {value}")
                 tui.progress("summary process", 100)
             else:
                 tui.error("Invalid selection")
@@ -176,7 +177,13 @@ def run():
         # - Use the appropriate function in the module 'tui' to display a message to indicate that the
         # data visualisation operation has completed.
         # TODO: Your code here
-
+        if main_menu == 3:
+            sub_menu = tui.menu(main_menu)
+            if sub_menu == 1:
+                tui.progress('Visualizing Top 5countries for confirmed', 0)
+                visual.top5_countries_confirmed()
+                tui.progress('top 5 countries for confirmed', 100)
+                print()
         # Task 31: Check if the user selected the option for exiting the program.
         # If so, then break out of the loop
         # TODO: Your code here
