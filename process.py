@@ -45,7 +45,7 @@ def record_by_date(records):
     covid_list = []
     for data in records:
         for date in dates:
-            if records[1] == date:
+            if data[1] == date:
                 covid_list.append(data)
     return covid_list
 
@@ -60,7 +60,7 @@ def records_by_country(records):
 
 
 def records_summary(records):
-    countries = {}
+    countries = records_by_country(records)
     for record in records:
         countries[record[3]] = {"confirmed": 0, "deaths": 0, "recovery": 0}
     for record in records:
@@ -70,5 +70,6 @@ def records_summary(records):
         countries[record[3]]["confirmed"] = confirmed
         countries[record[3]]["deaths"] = deaths
         countries[record[3]]["recovery"] = recovery
-    for country in countries.keys():
-        return f"{country}: {countries[country]}"
+    return countries
+    # for country in countries.keys():
+    #     return f"{country}: {countries[country]}"
